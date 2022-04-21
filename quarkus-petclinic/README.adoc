@@ -1,0 +1,26 @@
+= Quarkus Petclinic project
+
+== Run Locally
+
+[source, bash]
+----
+./mvnw compile quarkus:dev
+----
+
+== Kubernetes
+
+[source, bash]
+----
+./db.sh
+
+./petclinic.sh
+----
+
+== Create a new Container
+
+Need to have an account to quay.io with writting permissions to rhdevelopers org.
+
+[source, bash]
+----
+./mvnw package -DskipTests -Dquarkus.container-image.push=true
+----
