@@ -19,6 +19,7 @@ package org.springframework.samples.petclinic;
 import io.dekorate.helm.annotation.HelmChart;
 import io.dekorate.jib.annotation.JibBuild;
 import io.dekorate.knative.annotation.KnativeApplication;
+import io.dekorate.kubernetes.annotation.KubernetesApplication;
 import io.dekorate.tekton.annotation.TektonApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,6 +31,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
+@KubernetesApplication(replicas = 3)
 public class PetClinicApplication {
 
 	public static void main(String[] args) {
