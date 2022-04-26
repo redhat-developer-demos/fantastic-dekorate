@@ -2,6 +2,8 @@
 
 == Run Locally
 
+When running in dev mode Quarkus provides a zero config database out of the box. Make sure that Docker is installed and running in order to use this feature for the PostgreSQL database.
+
 [source, bash]
 ----
 ./mvnw compile quarkus:dev
