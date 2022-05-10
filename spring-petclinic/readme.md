@@ -175,6 +175,10 @@ Edit your `pom.xml` and add the following dependency:
     <groupId>io.dekorate</groupId>
     <artifactId>kubernetes-spring-starter</artifactId>
 </dependency>
+<dependency>
+    <groupId>io.dekorate</groupId>
+    <artifactId>jib-annotations</artifactId>
+</dependency>
 ```
 
 Run `mvn clean package` and check the manifest generated under `target/classes/META-INF/dekorate/kubernetes.yml`. It should contain a [`Deployment`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) pointing to the `quay.io/rhdevelopers/spring-petclinic:2.0.0` image and a `[Service](https://kubernetes.io/docs/concepts/services-networking/service/)` binded to the http port 8080.
