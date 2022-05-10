@@ -154,3 +154,75 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 [spring-petclinic-graphql]: https://github.com/spring-petclinic/spring-petclinic-graphql
 [spring-petclinic-kotlin]: https://github.com/spring-petclinic/spring-petclinic-kotlin
 [spring-petclinic-rest]: https://github.com/spring-petclinic/spring-petclinic-rest
+
+
+## Dekorate demo
+The purpose of this demo is to demonstrate the following:
+
+    How you can use the Dekorate kubernetes-spring-stater.
+    How Dekorate detects that this is a Spring Boot web app and automatically configures a service binded to the http port 8080.
+    How you can trigger an image build and push after the compilation using JIB and the hook provided by Dekorate.
+    How you can apply the generated manifests to a target cluster by adding the dekorate.deploy=true flag to the compilation command.
+
+This example has been used in Devoxx UK 2022.
+
+### Add kubernetes-spring-starter dependency
+
+Edit your `pom.xml` and add the following dependency:
+
+```xml
+<dependency>
+    <groupId>io.dekorate</groupId>
+    <artifactId>kubernetes-spring-starter</artifactId>
+</dependency>
+```
+
+Run `mvn clean package` and check the manifest generated under `target/classes/META-INF/dekorate/kubernetes.yml`. It should contain a [`Deployment`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) pointing to the `quay.io/rhdevelopers/spring-petclinic:2.0.0` image and a `[Service](https://kubernetes.io/docs/concepts/services-networking/service/)` binded to the http port 8080.
+
+### Customize manifests via annotations
+
+Add `@KubernetesApplication` annotation to `PetClinicApplication.java` class for customize the number of pods:
+
+```java
+package org.springframework.samples.petclinic;
+
+import io.dekorate.kubernetes.annotation.KubernetesApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@KubernetesApplication(replicas = 3)
+public class PetClinicApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PetClinicApplication.class, args);
+	}
+
+}
+```
+Run `mvn clean package` and check the number of replicas in the `target/classes/META-INF/dekorate/kubernetes.yml` file.
+
+### Customize manifests via properties
+
+Add the following properties to the `application.properties` file:
+```properties
+dekorate.kubernetes.replicas=4
+dekorate.kubernetes.expose=true
+
+dekorate.jib.image=quay.io/rhdevelopers/spring-petclinic:2.0.0
+dekorate.jib.registry=quay.io
+dekorate.jib.group=rhdevelopers
+dekorate.jib.name=spring-petclinic
+```
+
+### Build and deploy in one single step
+
+Run the following command to build the application, trigger the build and push of the container image and then deploy the manifest. Note that you need to be logged into the target cluster and also in the container image registry.
+```shell
+mvn clean package -Ddekorate.build=true -Ddekorate.push=true -Ddekorate.deploy=true
+```
+
+Dont forget to create the route if you are using an OpenShift cluster by running the following command:
+```shell
+oc expose svc spring-petclinic
+```
