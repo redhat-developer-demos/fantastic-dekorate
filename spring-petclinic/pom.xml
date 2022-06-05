@@ -26,7 +26,7 @@
     <nohttp-checkstyle.version>0.0.10</nohttp-checkstyle.version>
     <spring-format.version>0.0.31</spring-format.version>
 
-    <kubernetes-spring-starter.version>2.9.0</kubernetes-spring-starter.version>
+    <kubernetes-spring-starter.version>2.9.3</kubernetes-spring-starter.version>
   </properties>
 
   <dependencies>
@@ -143,19 +143,19 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>io.spring.javaformat</groupId>
-        <artifactId>spring-javaformat-maven-plugin</artifactId>
-        <version>${spring-format.version}</version>
-        <executions>
-          <execution>
-            <phase>validate</phase>
-            <goals>
-              <goal>validate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>io.spring.javaformat</groupId>-->
+<!--        <artifactId>spring-javaformat-maven-plugin</artifactId>-->
+<!--        <version>${spring-format.version}</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>validate</phase>-->
+<!--            <goals>-->
+<!--              <goal>validate</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
