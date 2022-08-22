@@ -26,7 +26,7 @@
     <nohttp-checkstyle.version>0.0.10</nohttp-checkstyle.version>
     <spring-format.version>0.0.31</spring-format.version>
 
-    <kubernetes-spring-starter.version>2.9.3</kubernetes-spring-starter.version>
+    <kubernetes-spring-starter.version>2.11.1</kubernetes-spring-starter.version>
   </properties>
 
   <dependencies>
@@ -108,29 +108,25 @@
     <!-- dekorate -->
     <dependency>
       <groupId>io.dekorate</groupId>
+      <artifactId>jib-annotations</artifactId>
+      <version>${kubernetes-spring-starter.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dekorate</groupId>
       <artifactId>kubernetes-spring-starter</artifactId>
       <version>${kubernetes-spring-starter.version}</version>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>io.dekorate</groupId>-->
+<!--      <artifactId>knative-annotations</artifactId>-->
+<!--      <version>${kubernetes-spring-starter.version}</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>helm-annotations</artifactId>
       <version>${kubernetes-spring-starter.version}</version>
     </dependency>
-    <dependency>
-      <groupId>io.dekorate</groupId>
-      <artifactId>knative-annotations</artifactId>
-      <version>${kubernetes-spring-starter.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dekorate</groupId>
-      <artifactId>tekton-annotations</artifactId>
-      <version>${kubernetes-spring-starter.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dekorate</groupId>
-      <artifactId>jib-annotations</artifactId>
-      <version>${kubernetes-spring-starter.version}</version>
-    </dependency>
+
     <!-- end of dekorate -->
 
 
